@@ -395,7 +395,7 @@ public class SnakeGame extends JFrame{
 			{
 				newGame();
 			}
-			//System.out.println(snake_lengthy[0]);
+			
 			repaint();
 		}
 	@Override
