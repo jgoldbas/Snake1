@@ -50,13 +50,12 @@ public class SnakeGame extends JFrame{
 	private boolean down = false;
 	
 	private int lengthofsnake;
-	//private int start = 0; // not needed anymore
 	
     private Timer timer;
     private int MAX_DELAY = 200;
-    private int delay = MAX_DELAY; //how fast the snake moves initially 
-    private int STEP_DELAY = 10; // the step to increase the speed
-    private int MIN_DELAY = 70; // the maximal speed the snake can go
+    private int delay = MAX_DELAY;	// how fast the snake moves initially 
+    private int STEP_DELAY = 10; 	// the step to increase the speed
+    private int MIN_DELAY = 70;		// the maximal speed the snake can go
     
     private int DOT_SIZE = 25;
     private int BOARD_WIDTH = 800;
@@ -115,7 +114,6 @@ public class SnakeGame extends JFrame{
 		menu.add(createFileScoreboardItem());
 		return menu;
 	}
-	
 	 /*
     Creates the File->Exit menu item and sets its action listener.
     @return the menu item  */
@@ -197,11 +195,9 @@ public class SnakeGame extends JFrame{
     		int new_x = Math.abs((int)(Math.random() * space));
     		int new_y = Math.abs((int)(Math.random() * space - 4));//menu at the top takes some pixels, 
     		//so we need a smaller random number-> subtract 3 from y coordinate (only)
-    		//System.out.println(new_x+ ":"+new_y);
+    		
     		apple_pos[0] = new_x * DOT_SIZE;
     		apple_pos[1] = new_y * DOT_SIZE;
-    		//System.out.println(apple_pos[0]+ ":"+apple_pos[1]);
-    		//System.out.println("------------------------------");
     		
     	}
     	
@@ -235,19 +231,16 @@ public class SnakeGame extends JFrame{
 			System.out.println("ATE APPLE!!");
 			player_score += WIN_SCORE;
 			System.out.println("score so far: " + player_score);
-			 //newApple();
+
 			 // Instead of calling eat Apple function, we create an EatAppleThread
 			EatAppleThread appleThread = new EatAppleThread();
 			appleThread.start();
 			//wait until thread is done running to get the new apple coordinates
 			while(appleThread.isAlive()) {
-				//System.out.println("Thread is running ");
+				
 			}
-			//System.out.println("Thread Done");
-			//appleThread.exit();
 			
 			 lengthofsnake++;
-			 //System.out.println("Before INIT: "+ delay);
 			 timer.stop();
 			 // calculate new delay
 			 if (delay > MIN_DELAY)
@@ -255,12 +248,12 @@ public class SnakeGame extends JFrame{
 				 delay -= STEP_DELAY;
 			 }
 			
-			 timer = new Timer(delay, this);// new game initiate timer 
+			 timer = new Timer(delay, this);	// new game initiate timer 
 		     timer.start();
 		}
 	}
 	
-	//this is the endgame where the snake runs into itself 
+	// This is the endgame where the snake runs into itself 
 	private void loseGame() 
 	{
 		int headx = snake_lengthx[0];
@@ -279,21 +272,17 @@ public class SnakeGame extends JFrame{
 				int response = JOptionPane.showConfirmDialog(popupFrame, "Game over! Your score was: " + player_score + ". Do you wish to play again?");
 				if(response == 0)
 				{
-//					System.out.println("0");
 					// the response is YES to start a new game:
 					restartGame = true;
 					break;
 				}
 				else if (response == 1)
 				{ 
-					//System.out.println("1");
-				
 					  System.exit(0); 
 				}
 				else 
 				{
 					lostGame = true; 
-					//repaint();
 					break;
 				}
 			}	
@@ -304,31 +293,28 @@ public class SnakeGame extends JFrame{
 
 	
 	public void newGame() {
-		//player score reset to 0
+		// player score reset to 0
 		player_score = 0;
 		// still playing
 		lostGame = false;
 		restartGame = false;
-		//initialize length
+		// initialize length
 		lengthofsnake = 7;
-		//initialize vars for snake direction
+		// initialize vars for snake direction
 		right = true;
 		up = false;
 		left = false;
 		down = false;
 		// initialize delay to starting speed
 		delay = MAX_DELAY;
-		//initialize the snake
+		// initialize the snake
 		initSnake();
 		//relocate/create new apple
-		//newApple();
 		EatAppleThread appleThread = new EatAppleThread();
 		appleThread.start();
-		//wait until thread is done running to get the new apple coordinates
+		// wait until thread is done running to get the new apple coordinates
 		while(appleThread.isAlive()) {
-			//System.out.println("Thread is running " );
 		}
-		//System.out.println("Thread Done" );
 		timer = new Timer(delay, this);// new game initiate timer 
         timer.start();
         //System.out.println("After init: " + delay);
@@ -340,10 +326,9 @@ public class SnakeGame extends JFrame{
 		
 			timer.start();
 			
-			//for snake to move want coordinates of body to go down
-			//except for the head, everything else will get shifted one place
+			// for snake to move want coordinates of body to go down
+			// except for the head, everything else will get shifted one place
 			// this way the body moves forward
-			////System.out.println(snake_lengthx[0] + snake_lengthx[1] + snake_lengthx[2]);
 			
 			eatApple();
 			loseGame();
@@ -355,7 +340,6 @@ public class SnakeGame extends JFrame{
 				snake_lengthx[i] = snake_lengthx[i - 1]; 
 				snake_lengthy[i] = snake_lengthy[i - 1]; 
 			}
-			//System.out.println(snake_lengthx[0] + snake_lengthx[1] + snake_lengthx[2]);
 			
 			//where the head goes depends on the direction from the key pressed 
 			if(right)
@@ -375,7 +359,7 @@ public class SnakeGame extends JFrame{
 				snake_lengthy[0] += DOT_SIZE;
 			}
 			
-			//to check for snake at borders of panel
+			// to check for snake at borders of panel
 			if(snake_lengthy[0] > BOARD_HEIGHT) {
 				snake_lengthy[0] = 0;
 			}
@@ -406,7 +390,7 @@ public class SnakeGame extends JFrame{
 			
 		}
 	
-	/*call initSnake every time we start a new game to place the snake in initial position on the board*/
+	/* Call initSnake every time we start a new game to place the snake in initial position on the board*/
 	private void initSnake()
 	{
 		
@@ -454,7 +438,7 @@ public class SnakeGame extends JFrame{
 		}
 		
 		
-		if(lostGame)  //if you lost the game paint the score
+		if(lostGame)  // if you lost the game paint the score
 		{
 			// "GAME OVER THIS IS YOUR SCORE"
 			g.setColor(Color.white);
@@ -465,7 +449,7 @@ public class SnakeGame extends JFrame{
 			g.drawString("Your score is: "+ player_score, 200, 350);
 			player_score = 0;
 		}
-		g.dispose();//disposes of graphics component, throw away pointer that gets us this specific g
+		g.dispose();	// disposes of graphics component, throw away pointer that gets us this specific g
 	}
 	}
 	 
