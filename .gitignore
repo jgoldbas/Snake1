@@ -1,6 +1,7 @@
 *.project
 *.DS_Store
 *.db
+snakegame.db
 *.classpath
 .settings/**
 bin/**
