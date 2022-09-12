@@ -194,7 +194,7 @@ public class SnakeGame extends JFrame{
     		//want new random integer that goes from 0 to 800/applesize
     		int new_x = Math.abs((int)(Math.random() * space));
     		int new_y = Math.abs((int)(Math.random() * space - 4));//menu at the top takes some pixels, 
-    		//so we need a smaller random number-> subtract 3 from y coordinate (only)
+    		//so we need a smaller random number-> subtract 3 from y coordinate (only) test
     		
     		apple_pos[0] = new_x * DOT_SIZE;
     		apple_pos[1] = new_y * DOT_SIZE;
